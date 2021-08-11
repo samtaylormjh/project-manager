@@ -1,6 +1,7 @@
 import { Field } from "react-final-form";
 import { Container, FormGroup, Label, Input, Col, Button } from "reactstrap";
 import Select from "react-select";
+import _ from "lodash";
 
 const required = (value) => (value ? undefined : "Required");
 
@@ -12,16 +13,7 @@ const composeValidators =
       undefined
     );
 
-export default function projectForm(props) {
-  console.log(props);
-
-  const options = [
-    { value: "", label: "" },
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
-
+export default function ProjectForm(props) {
   return (
     <div>
       <Container>
@@ -48,7 +40,7 @@ export default function projectForm(props) {
               component={selectField}
               name="project_manager_id"
               label="Project Manager"
-              options={options}
+              employees={props.employees}
               validate={composeValidators(required)}
             />
           </Col>
@@ -80,11 +72,22 @@ const InputField = (props) => {
 };
 
 const selectField = (props) => {
-  const { input, meta } = props;
+  const { input, meta, employees } = props;
+
   return (
     <div>
       <FormGroup>
-        <Select options={props.options} />
+        <Select
+          valid={meta.touched && meta.valid}
+          invalid={meta.touched && meta.invalid}
+          {...input}
+          options={_.map(employees, (e) => {
+            return {
+              value: e.id,
+              label: e.fname + " " + e.lname,
+            };
+          })}
+        />
       </FormGroup>
     </div>
   );

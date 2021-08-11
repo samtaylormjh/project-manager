@@ -11,7 +11,7 @@ const composeValidators =
       undefined
     );
 
-export default function employeeForm(props) {
+export default function EmployeeForm(props) {
   return (
     <div>
       <Container>

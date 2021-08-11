@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Breadcrumb, BreadcrumbItem, Container } from "reactstrap";
 import { Form } from "react-final-form";
-import projectForm from "./form";
+import ProjectForm from "./form";
 import { addProject } from "../actions";
 
 function mapStateToProps(state) {
@@ -11,11 +11,16 @@ function mapStateToProps(state) {
 
 function NewProject(props) {
   const handleSubmit = (values) => {
-    console.log(values);
     const ids = props.projects.map((p) => p.id);
     values.id = Math.max(...ids) + 1;
+
+    const project_num = props.projects.map((p) => p.id);
+    values.number = Math.max(...project_num) + 1;
+
+    values.project_manager_id = values.project_manager_id.value;
+
     props.addProject(values);
-    props.history.push("/");
+    props.history.push("/?tab=2");
   };
 
   return (
@@ -31,7 +36,7 @@ function NewProject(props) {
       </Breadcrumb>
       <br />
       <Form
-        component={projectForm}
+        component={ProjectForm}
         onSubmit={handleSubmit}
         employees={props.employees}
       />

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Breadcrumb, BreadcrumbItem, Container } from "reactstrap";
 import { Form } from "react-final-form";
-import employeeForm from "./form";
+import EmployeeForm from "./form";
 
 function mapStateToProps(state) {
   console.log(state);
@@ -30,7 +30,7 @@ function NewEmployee(props) {
         </BreadcrumbItem>
       </Breadcrumb>
       <br />
-      <Form component={employeeForm} onSubmit={handleSubmit} />
+      <Form component={EmployeeForm} onSubmit={handleSubmit} />
     </Container>
   );
 }

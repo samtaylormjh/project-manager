@@ -33,7 +33,6 @@ function Index(props) {
   };
 
   let sortedEmployees = _.sortBy(props.employees, "id");
-
   return (
     <Container>
       <br />
@@ -109,7 +108,11 @@ function Index(props) {
                 </thead>
                 <tbody>
                   {_.map(props.projects, (project) => (
-                    <Project key={project.id} project={project} />
+                    <Project
+                      key={project.id}
+                      project={project}
+                      employees={props.employees}
+                    />
                   ))}
                 </tbody>
               </Table>
@@ -149,11 +152,15 @@ const Employee = (props) => {
 };
 
 const Project = (props) => {
-  const { project } = props;
+  const { project, employees } = props;
+  const manager_id = _.find(employees, (e) => {
+    return e.id === project.project_manager_id;
+  });
+
   return (
     <tr>
-      <td>manager ID</td>
       <td>{project.name}</td>
+      <td>{manager_id.fname + " " + manager_id.lname}</td>
       <td>{project.number}</td>
       <td>
         <Link to={`/${project.id}/edit`}>
