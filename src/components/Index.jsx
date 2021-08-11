@@ -21,7 +21,12 @@ function mapStateToProps(state) {
 }
 
 function Index(props) {
-  const [activeTab, setActiveTab] = useState("1");
+  let initialState = "1";
+  if (props.location.search === "?tab=2") {
+    initialState = "2";
+  }
+
+  const [activeTab, setActiveTab] = useState(initialState);
 
   const toggle = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);
@@ -59,7 +64,7 @@ function Index(props) {
           <Row>
             <Col sm="12">
               <br />
-              <Link to="/new">
+              <Link to="/employees/new">
                 <Button color="primary" size="sm">
                   New Employee +
                 </Button>
@@ -87,9 +92,11 @@ function Index(props) {
           <Row>
             <Col sm="10">
               <br />
-              <Button color="primary" size="sm">
-                New Project +
-              </Button>
+              <Link to={"/projects/new"}>
+                <Button color="primary" size="sm">
+                  New Project +
+                </Button>
+              </Link>
               <br />
               <br />
               <Table hover size="sm">

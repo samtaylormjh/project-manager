@@ -1,3 +1,5 @@
+const { ADD_EMPLOYEE, ADD_PROJECT } = require("./actions");
+
 const placeholderEmployees = [
   {
     id: 1,
@@ -34,6 +36,10 @@ const placeholderProjects = [
 
 const projectsReducer = (state = placeholderProjects, action) => {
   switch (action.type) {
+    case ADD_PROJECT: {
+      const newState = [...state, action.project];
+      return newState;
+    }
     default:
       return state;
   }
@@ -41,6 +47,10 @@ const projectsReducer = (state = placeholderProjects, action) => {
 
 const employeeReducer = (state = placeholderEmployees, action) => {
   switch (action.type) {
+    case ADD_EMPLOYEE: {
+      const newState = [...state, action.employee];
+      return newState;
+    }
     default:
       return state;
   }
