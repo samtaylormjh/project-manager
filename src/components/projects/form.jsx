@@ -73,11 +73,11 @@ const InputField = (props) => {
 
 const selectField = (props) => {
   const { input, meta, employees } = props;
-
   return (
     <div>
       <FormGroup>
         <Select
+          isMulti
           valid={meta.touched && meta.valid}
           invalid={meta.touched && meta.invalid}
           {...input}

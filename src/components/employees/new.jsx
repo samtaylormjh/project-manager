@@ -6,7 +6,6 @@ import { Form } from "react-final-form";
 import EmployeeForm from "./form";
 
 function mapStateToProps(state) {
-  console.log(state);
   return { employees: state.employees };
 }
 

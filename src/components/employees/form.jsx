@@ -12,6 +12,7 @@ const composeValidators =
     );
 
 export default function EmployeeForm(props) {
+  console.log(props.values);
   return (
     <div>
       <Container>
@@ -53,13 +54,15 @@ export default function EmployeeForm(props) {
 
 const InputField = (props) => {
   const { input, meta } = props;
+
+  // input.onChange();
+
   return (
     <div>
       <FormGroup>
         <Input
           valid={meta.touched && meta.valid}
           invalid={meta.touched && meta.invalid}
-          {...input}
           type="text"
           placeholder={props.label}
         />
